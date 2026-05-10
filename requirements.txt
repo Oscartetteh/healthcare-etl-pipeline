@@ -1,0 +1,9 @@
+pandas
+numpy
+sqlalchemy
+psycopg2-binary
+pytest
+python-dotenv
+colorlog
+python-docx
+openpyxl
