@@ -26,7 +26,6 @@ The pipeline must:
 - **Load:** save the clean data to `data/processed/processed-data.csv`
 
 ---
-
 ## Success Criteria
 
 - [ ] `DataValidator` catches all data quality issues from the raw file
@@ -39,4 +38,90 @@ The pipeline must:
 
 ---
 
-> Build your project from scratch using the teaching project as your reference.
+# Healthcare ETL Pipeline
+
+## Project Architecture
+
+This project is designed as a modular ETL pipeline for cleaning messy healthcare data from St. Aurelius General Hospital. The pipeline reads raw patient, appointment, and billing data, validates data quality issues, transforms the data, and saves a clean processed dataset for future analysis or modelling.
+
+The architecture follows this flow:
+
+```text
+Raw CSV File
+data/raw/raw-data.csv
+        |
+        v
+Extract Layer
+ETLPipeline.extract()
+        |
+        v
+Validation Layer
+DataValidator
+- Checks null values
+- Checks duplicates
+- Checks invalid ranges
+- Checks wrong data types
+- Checks unexpected negative values
+        |
+        v
+Transformation Layer
+DataTransformer
+- Fills missing values
+- Removes duplicate rows
+- Fixes data types
+- Corrects invalid values where appropriate
+- Adds derived columns
+  - age_from_dob
+  - bill_collection_rate
+        |
+        v
+Load Layer
+ETLPipeline.load()
+        |
+        v
+Processed CSV File
+data/processed/processed-data.csv
+        |
+        v
+Reporting Layer
+ReportWriter
+- Excel report
+- Word report
+- Transformation summary
+- Data quality summary
+
+# Project Structure
+
+Healthcare_ETL_Pipeline/
+│
+├── data/
+│   ├── raw/
+│   │   ├── raw-data.csv
+│   │   └── .gitkeep
+│   │
+│   └── processed/
+│       ├── processed-data.csv
+│       └── .gitkeep
+│
+├── reports/
+│   ├── etl-report.xlsx
+│   ├── etl-report.docx
+│   └── .gitkeep
+│
+├── src/
+│   ├── __init__.py
+│   ├── etl_pipeline.py
+│   ├── validator.py
+│   ├── transformer.py
+│   └── report_writer.py
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_pipeline.py
+│
+├── config.py
+├── run.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── .env

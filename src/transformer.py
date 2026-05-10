@@ -464,4 +464,3 @@ class DataTransformer:
             f"final={len(self.df)}, "
             f"changes={len(self.changes)})"
         )
-
